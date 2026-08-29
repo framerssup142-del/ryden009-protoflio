@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>لوحة التحكم — Ryden</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;900&family=Lalezar&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <div class="admin-wrap">
+    <div class="admin-narrow" id="loginCard">
+      <div class="admin-card">
+        <h1>لوحة التحكم</h1>
+        <p class="admin-sub">سجل دخولك عشان تقدر تعدل محتوى الموقع والفيديوهات</p>
+        <form id="loginForm">
+          <div class="field">
+            <label>الإيميل</label>
+            <input type="email" id="loginEmail" required/>
+          </div>
+          <div class="field">
+            <label>الباسورد</label>
+            <input type="password" id="loginPass" required/>
+          </div>
+          <button type="submit" class="btn btn-full">دخول</button>
+          <div class="msg" id="loginMsg"></div>
+        </form>
+      </div>
+    </div>
+
+    <div class="container" id="panelCard" style="display:none;max-width:760px">
+      <div class="admin-topbar">
+        <h1>لوحة التحكم</h1>
+        <button class="btn btn-outline" id="logoutBtn">تسجيل خروج</button>
+      </div>
+
+      <!-- ===== محتوى الصفحة ===== -->
+      <div class="admin-card admin-section">
+        <h2>محتوى الصفحة الرئيسية</h2>
+        <form id="contentForm">
+          <div class="field">
+            <label>صورتك</label>
+            <div class="photo-preview" id="photoPreview"><img src="assets/images/profile.jpg"/></div>
+            <input type="file" id="photoInput" accept="image/*"/>
+          </div>
+          <div class="field">
+            <label>الاسم</label>
+            <input type="text" id="cName"/>
+          </div>
+          <div class="field">
+            <label>الدور / التخصص</label>
+            <input type="text" id="cRole"/>
+          </div>
+          <div class="field">
+            <label>الجملة الرئيسية (تحت الصورة)</label>
+            <input type="text" id="cTagline"/>
+          </div>
+          <div class="field">
+            <label>نبذة عني (كل فقرة في سطر لوحدها)</label>
+            <textarea id="cBio"></textarea>
+          </div>
+          <button type="submit" class="btn btn-full">حفظ التعديلات</button>
+          <div class="msg" id="contentMsg"></div>
+        </form>
+      </div>
+
+      <!-- ===== الفيديوهات ===== -->
+      <div class="admin-card admin-section">
+        <h2>إضافة فيديو</h2>
+        <form id="videoForm">
+          <div class="field">
+            <label>لينك الفيديو (يوتيوب شورتس أو جوجل درايف)</label>
+            <input type="url" id="videoUrlInput" placeholder="https://youtube.com/shorts/... أو https://drive.google.com/file/d/.../view" required/>
+          </div>
+          <div class="field">
+            <label>العنوان (بيتجاب تلقائي من يوتيوب، وتقدر تعدّله)</label>
+            <input type="text" id="videoTitleInput" placeholder="عنوان الفيديو"/>
+          </div>
+          <button type="submit" class="btn btn-full">إضافة الفيديو</button>
+          <div class="msg" id="videoMsg"></div>
+        </form>
+      </div>
+
+      <div class="admin-card admin-section">
+        <h2>الفيديوهات الحالية</h2>
+        <div id="videosList"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>رياض إبراهيم (Ryden) — Video Editor & Content Creator</title>
+  <meta name="description" content="رياض إبراهيم (رايدن) — Video Editor وصانع محتوى، بساعدك تكون نفسك على السوشيال ميديا."/>
+  <link rel="icon" type="image/png" href="assets/images/logo.png"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;900&family=Lalezar&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+  <!-- Timeline scrubber: مؤشر تمرير على شكل تايم لاين مونتاج -->
+  <div class="scrubber">
+    <span class="scrubber-brand">Ryden<span>.</span></span>
+    <div class="scrubber-track">
+      <div class="scrubber-ticks">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <div class="scrubber-fill" id="scrubberFill"></div>
+      <div class="scrubber-head" id="scrubberHead"></div>
+    </div>
+    <span class="scrubber-tc" id="scrubberTC">00:00:00:00</span>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-photo-wrap">
+      <div class="hero-photo">
+        <img id="heroPhoto" src="assets/images/profile.jpg" alt="رياض إبراهيم"/>
+      </div>
+    </div>
+    <h1 class="hero-name" id="heroName">رياض إبراهيم <span class="accent">(رايدن)</span></h1>
+    <p class="hero-role" id="heroRole">Video Editor · صانع محتوى · مهتم بالـ AI</p>
+    <p class="hero-tagline" id="heroTagline">بساعدك تكون نفسك على السوشيال ميديا</p>
+
+    <div class="hero-scroll">
+      <span class="dot"></span>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section container" id="about">
+    <span class="sec-eyebrow">نبذة عني</span>
+    <h2 class="sec-title">مين رياض؟</h2>
+    <div class="about-body" id="bioBody">
+      <!-- محتوى يتحمّل من Firestore عبر site.js -->
+      <p class="reveal">أنا رياض إبراهيم (رايدن)، Video Editor وصانع محتوى مهتم بتطوير صناعة المحتوى من خلال الجمع بين الإبداع، المونتاج، والذكاء الاصطناعي.</p>
+      <p class="reveal">بدأت رحلتي في صناعة المحتوى والمونتاج من سنين، وخلال رحلتي اشتغلت على محتوى لمجالات مختلفة، وساعدت في صناعة فيديوهات وصلت لملايين المشاهدات. ومع الوقت، لم يعد اهتمامي مقتصرًا على المونتاج فقط، بل أصبحت مهتمًا بفهم كيف ولماذا ينجح المحتوى؛ بدايةً من الـHook والـStorytelling وحتى استراتيجية توزيع المحتوى.</p>
+      <p class="reveal">حاليًا أركز على استغلال AI لتطوير طريقة صناعة المحتوى، وبناء workflows تساعد صناع المحتوى والبراندات على إنتاج محتوى أسرع، أذكى، وأكثر تميزًا.</p>
+      <p class="reveal">هدفي ببساطة: أن أصنع محتوى لا يكتفي بأن يبدو جيدًا، بل يكون لديه سبب حقيقي يجعل الناس تتوقف، تشاهد، وتتفاعل.</p>
+    </div>
+  </section>
+
+  <!-- ============ VIDEOS ============ -->
+  <section class="section container" id="works">
+    <span class="sec-eyebrow">شغلي</span>
+    <h2 class="sec-title">فيديوهات من الشغل</h2>
+    <div class="videos-grid" id="videosGrid">
+      <p class="videos-empty">جاري تحميل الفيديوهات...</p>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section container" id="contact">
+    <span class="sec-eyebrow">تواصل معايا</span>
+    <h2 class="sec-title">جاهز نشتغل مع بعض؟</h2>
+    <div class="contact-band">
+      <a class="ch wa" href="https://wa.me/201505998614" target="_blank" rel="noopener">
+        <div class="ch-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0012.05 0"/></svg></div>
+        <div><span class="ch-l">واتساب</span><span class="ch-v">تواصل مباشر</span></div>
+      </a>
+      <a class="ch em" href="mailto:framers.sup142@gmail.com">
+        <div class="ch-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div><span class="ch-l">إيميل</span><span class="ch-v">راسلني</span></div>
+      </a>
+      <a class="ch ig" href="https://www.instagram.com/ryden009/" target="_blank" rel="noopener">
+        <div class="ch-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/></svg></div>
+        <div><span class="ch-l">Instagram</span><span class="ch-v">@ryden009</span></div>
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div>© <span id="year"></span> رياض إبراهيم — Ryden</div>
+    <a href="admin.html">لوحة التحكم</a>
+  </footer>
+
+  <!-- Firebase (compat SDK — مفيش حاجة تتبني، سكريبت تاج عادي) -->
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/site.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
