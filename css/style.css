@@ -247,3 +247,6 @@ html[dir="rtl"] .scrubber-fill{right:0;left:auto}
 .social-ic.fb:hover{color:#1877F2;border-color:rgba(24,119,242,.35)}
 .social-ic.tk:hover{color:#fff;border-color:rgba(255,255,255,.3)}
 .social-ic.wa:hover{color:#25D366;border-color:rgba(37,211,102,.35)}
+
+/* icon row when used inside the contact section (not the footer) */
+.social-row-lg{gap:16px}
