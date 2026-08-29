@@ -235,3 +235,15 @@ html[dir="rtl"] .scrubber-fill{right:0;left:auto}
 }
 .icon-btn:hover{color:var(--text);border-color:var(--border-2)}
 .icon-btn.danger:hover{color:#ff8080;border-color:rgba(230,70,70,.3)}
+
+/* ============ Footer social icons ============ */
+.social-row{display:flex;gap:12px;margin-bottom:6px}
+.social-ic{
+  width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:var(--surface);border:1px solid var(--border);color:var(--text-muted);transition:var(--trans);
+}
+.social-ic:hover{transform:translateY(-3px);color:var(--text);border-color:var(--border-2)}
+.social-ic.ig:hover{color:#E1306C;border-color:rgba(225,48,108,.35)}
+.social-ic.fb:hover{color:#1877F2;border-color:rgba(24,119,242,.35)}
+.social-ic.tk:hover{color:#fff;border-color:rgba(255,255,255,.3)}
+.social-ic.wa:hover{color:#25D366;border-color:rgba(37,211,102,.35)}
