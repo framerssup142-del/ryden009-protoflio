@@ -66,16 +66,38 @@
         </form>
       </div>
 
+      <!-- ===== سكرين شوتات الأثر ===== -->
+      <div class="admin-card admin-section">
+        <h2>سكرين شوتات نتائج الشغل (الأثر)</h2>
+        <form id="impactForm">
+          <div class="field">
+            <label>الصورة (سكرين شوت لعدد مشاهدات أو نتيجة)</label>
+            <input type="file" id="impactImageInput" accept="image/*" required/>
+          </div>
+          <div class="field">
+            <label>وصف مختصر (اختياري — زي "3.2 مليون مشاهدة")</label>
+            <input type="text" id="impactCaptionInput" placeholder="اختياري"/>
+          </div>
+          <button type="submit" class="btn btn-full">إضافة الصورة</button>
+          <div class="msg" id="impactMsg"></div>
+        </form>
+      </div>
+
+      <div class="admin-card admin-section">
+        <h2>الصور الحالية</h2>
+        <div id="impactList"></div>
+      </div>
+
       <!-- ===== الفيديوهات ===== -->
       <div class="admin-card admin-section">
         <h2>إضافة فيديو</h2>
         <form id="videoForm">
           <div class="field">
-            <label>لينك الفيديو (يوتيوب شورتس أو جوجل درايف)</label>
-            <input type="url" id="videoUrlInput" placeholder="https://youtube.com/shorts/... أو https://drive.google.com/file/d/.../view" required/>
+            <label>لينك الفيديو (يوتيوب شورتس / تيك توك / جوجل درايف)</label>
+            <input type="url" id="videoUrlInput" placeholder="https://youtube.com/shorts/... أو https://tiktok.com/@user/video/... أو https://drive.google.com/file/d/.../view" required/>
           </div>
           <div class="field">
-            <label>العنوان (بيتجاب تلقائي من يوتيوب، وتقدر تعدّله)</label>
+            <label>العنوان (بيتجاب تلقائي من يوتيوب وتيك توك، وتقدر تعدّله)</label>
             <input type="text" id="videoTitleInput" placeholder="عنوان الفيديو"/>
           </div>
           <button type="submit" class="btn btn-full">إضافة الفيديو</button>

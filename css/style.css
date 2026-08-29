@@ -141,6 +141,8 @@ html[dir="rtl"] .scrubber-fill{right:0;left:auto}
 }
 .vcard:hover .vframe{border-color:rgba(232,163,61,.3);transform:translateY(-4px);box-shadow:0 16px 46px rgba(0,0,0,.45)}
 .vframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vframe-tiktok{aspect-ratio:auto;height:auto;background:transparent;border:none;box-shadow:none;overflow:visible}
+.vframe-tiktok:hover{transform:none;box-shadow:none}
 .vtitle{font-size:14px;color:var(--text-muted);line-height:1.6;padding:0 2px}
 .vtitle .w{display:inline-block;opacity:0;transform:translateY(10px);filter:blur(2px)}
 .vcard.in-view .vtitle .w{animation:wordUp .55s cubic-bezier(.2,.8,.2,1) forwards}
@@ -250,3 +252,40 @@ html[dir="rtl"] .scrubber-fill{right:0;left:auto}
 
 /* icon row when used inside the contact section (not the footer) */
 .social-row-lg{gap:16px}
+
+/* ============ Impact / Proof screenshots ============ */
+.impact-sub{color:var(--text-muted);font-size:15px;margin-top:-24px;margin-bottom:36px;max-width:560px}
+.impact-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;
+}
+.impact-card{
+  position:relative;aspect-ratio:4/3;border-radius:16px;overflow:hidden;
+  border:1px solid var(--border);background:var(--surface);
+  box-shadow:0 8px 26px rgba(0,0,0,.3);transition:var(--trans);
+}
+.impact-card img{
+  width:100%;height:100%;object-fit:cover;
+  filter:blur(3px) brightness(.75) saturate(1.05);
+  transform:scale(1.06);
+  transition:filter .5s ease, transform .5s ease;
+}
+.impact-card:hover img{filter:blur(0) brightness(.9) saturate(1.05);transform:scale(1.1)}
+.impact-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(8,8,12,0) 40%, rgba(8,8,12,.75) 100%);
+  pointer-events:none;
+}
+.impact-caption{
+  position:absolute;bottom:0;inset-inline:0;padding:14px 16px;font-size:13px;font-weight:600;
+  color:var(--text);z-index:2;
+}
+.impact-badge{
+  position:absolute;top:12px;inset-inline-start:12px;z-index:2;
+  font-size:10px;font-family:var(--font-mono);letter-spacing:.06em;color:var(--gold);
+  background:rgba(8,8,12,.55);backdrop-filter:blur(6px);border:1px solid rgba(232,163,61,.3);
+  padding:3px 9px;border-radius:99px;
+}
+
+/* impact admin list row thumbnail */
+.video-row .thumb-img{width:52px;height:40px;border-radius:8px;overflow:hidden;flex-shrink:0}
+.video-row .thumb-img img{width:100%;height:100%;object-fit:cover}

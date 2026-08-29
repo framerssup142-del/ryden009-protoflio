@@ -27,6 +27,25 @@ function parseVideoUrl(rawUrl) {
     }
   }
 
+  // ---- TikTok (official oEmbed support) ----
+  const tkPatterns = [
+    /tiktok\.com\/@([\w.-]+)\/video\/(\d+)/,
+  ];
+  for (const re of tkPatterns) {
+    const m = url.match(re);
+    if (m) {
+      const [, username, videoId] = m;
+      const permalink = `https://www.tiktok.com/@${username}/video/${videoId}`;
+      return {
+        platform: "tiktok",
+        embedId: videoId,
+        embedUrl: null,
+        permalink,
+        watchUrl: permalink,
+      };
+    }
+  }
+
   // ---- Google Drive ----
   const drivePatterns = [
     /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/,
@@ -55,6 +74,18 @@ async function fetchYoutubeTitle(watchUrl) {
     const res = await fetch(
       `https://noembed.com/embed?url=${encodeURIComponent(watchUrl)}&format=json`
     );
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.title || null;
+  } catch (e) {
+    return null;
+  }
+}
+
+/* بيجيب عنوان فيديو التيك توك تلقائيًا من عنوانه الحقيقي على المنصة (oEmbed رسمي من تيك توك) */
+async function fetchTiktokTitle(watchUrl) {
+  try {
+    const res = await fetch(`https://www.tiktok.com/oembed?url=${encodeURIComponent(watchUrl)}`);
     if (!res.ok) return null;
     const data = await res.json();
     return data.title || null;

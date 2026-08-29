@@ -35,6 +35,17 @@ function updateScrubber() {
 window.addEventListener("scroll", updateScrubber, { passive: true });
 updateScrubber();
 
+/* بيحمّل سكريبت تيك توك الرسمي عشان يحول أي blockquote بتاعه لبلاير شغال */
+function loadTiktokEmbedScript() {
+  const old = document.getElementById("tiktok-embed-script");
+  if (old) old.remove();
+  const s = document.createElement("script");
+  s.id = "tiktok-embed-script";
+  s.async = true;
+  s.src = "https://www.tiktok.com/embed.js";
+  document.body.appendChild(s);
+}
+
 /* ---------- تحميل محتوى الصفحة (الاسم / النبذة / التاجلاين / الصورة) ---------- */
 async function loadSiteContent() {
   try {
@@ -61,6 +72,35 @@ async function loadSiteContent() {
   }
 }
 
+/* ---------- تحميل سكرين شوتات الأثر / النتائج ---------- */
+async function loadImpact() {
+  const grid = document.getElementById("impactGrid");
+  if (!grid) return;
+  try {
+    const snap = await db.collection("impact").orderBy("createdAt", "desc").get();
+    if (snap.empty) {
+      grid.innerHTML = `<p class="videos-empty">هتظهر هنا سكرين شوتات النتائج أول ما تتضاف من لوحة التحكم.</p>`;
+      return;
+    }
+    grid.innerHTML = "";
+    snap.forEach((doc) => {
+      const d = doc.data();
+      const card = document.createElement("div");
+      card.className = "impact-card reveal";
+      card.innerHTML = `
+        <span class="impact-badge">Proof</span>
+        <img src="${d.imageURL}" alt="${d.caption || "نتيجة شغل"}" loading="lazy"/>
+        ${d.caption ? `<div class="impact-caption">${d.caption}</div>` : ""}
+      `;
+      grid.appendChild(card);
+    });
+    initReveal();
+  } catch (e) {
+    console.error("تعذّر تحميل سكرين شوتات الأثر:", e);
+    grid.innerHTML = `<p class="videos-empty">حصل خطأ في تحميل الصور.</p>`;
+  }
+}
+
 /* ---------- تحميل الفيديوهات ---------- */
 async function loadVideos() {
   const grid = document.getElementById("videosGrid");
@@ -76,18 +116,30 @@ async function loadVideos() {
     }
 
     grid.innerHTML = "";
+    let hasTiktok = false;
     snap.forEach((doc) => {
       const v = doc.data();
       const card = document.createElement("div");
       card.className = "vcard";
+
+      let mediaHtml;
+      if (v.platform === "tiktok") {
+        hasTiktok = true;
+        mediaHtml = `<blockquote class="tiktok-embed" cite="${v.permalink}" data-video-id="${v.embedId}" style="max-width:100%;min-width:100%;margin:0;"><section></section></blockquote>`;
+      } else {
+        mediaHtml = `<iframe src="${v.embedUrl}" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+      }
+
       card.innerHTML = `
-        <div class="vframe">
-          <iframe src="${v.embedUrl}" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        <div class="vframe ${v.platform === "tiktok" ? "vframe-tiktok" : ""}">
+          ${mediaHtml}
         </div>
         <p class="vtitle">${wrapWords(v.title || "بدون عنوان")}</p>
       `;
       grid.appendChild(card);
     });
+
+    if (hasTiktok) loadTiktokEmbedScript();
 
     // نفعّل أنيميشن ظهور العناوين كل ما الكارت يدخل الشاشة
     const io = new IntersectionObserver(
@@ -110,6 +162,7 @@ async function loadVideos() {
 
 document.addEventListener("DOMContentLoaded", () => {
   loadSiteContent();
+  loadImpact();
   loadVideos();
   initReveal();
 });

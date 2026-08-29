@@ -22,6 +22,10 @@ service cloud.firestore {
       allow read: if true;
       allow write: if request.auth != null;
     }
+    match /impact/{shotId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
   }
 }
 ```

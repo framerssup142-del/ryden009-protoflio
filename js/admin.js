@@ -29,6 +29,7 @@ auth.onAuthStateChanged((user) => {
     loginCard.style.display = "none";
     panelCard.style.display = "block";
     loadContentForm();
+    loadImpactList();
     loadVideosList();
   } else {
     loginCard.style.display = "block";
@@ -114,6 +115,94 @@ contentForm.addEventListener("submit", async (e) => {
   }
 });
 
+/* ---------- سكرين شوتات الأثر / النتائج ---------- */
+const impactForm = document.getElementById("impactForm");
+const impactImageInput = document.getElementById("impactImageInput");
+const impactCaptionInput = document.getElementById("impactCaptionInput");
+const impactMsg = document.getElementById("impactMsg");
+const impactList = document.getElementById("impactList");
+
+impactForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const file = impactImageInput.files[0];
+  if (!file) return;
+  const btn = impactForm.querySelector("button[type=submit]");
+  btn.disabled = true;
+  impactMsg.className = "msg";
+  try {
+    const dataUrl = await compressImage(file, 900, 0.82);
+    await db.collection("impact").add({
+      imageURL: dataUrl,
+      caption: impactCaptionInput.value.trim() || null,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    impactForm.reset();
+    impactMsg.textContent = "✓ اتضافت الصورة";
+    impactMsg.className = "msg ok show";
+    setTimeout(() => impactMsg.classList.remove("show"), 2500);
+    loadImpactList();
+  } catch (err) {
+    console.error(err);
+    impactMsg.textContent = "حصل خطأ في الإضافة";
+    impactMsg.className = "msg err show";
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+async function loadImpactList() {
+  impactList.innerHTML = `<p class="admin-sub">جاري التحميل...</p>`;
+  try {
+    const snap = await db.collection("impact").orderBy("createdAt", "desc").get();
+    if (snap.empty) {
+      impactList.innerHTML = `<p class="admin-sub">لسه مفيش صور مضافة.</p>`;
+      return;
+    }
+    impactList.innerHTML = "";
+    snap.forEach((doc) => {
+      const d = doc.data();
+      const row = document.createElement("div");
+      row.className = "video-row";
+      row.innerHTML = `
+        <div class="thumb-img"><img src="${d.imageURL}"/></div>
+        <div class="vrow-title">
+          <input type="text" value="${(d.caption || "").replace(/"/g, "&quot;")}" placeholder="بدون وصف" data-id="${doc.id}"/>
+        </div>
+        <div class="vrow-actions">
+          <button class="icon-btn danger" data-delete-impact="${doc.id}" title="حذف">✕</button>
+        </div>
+      `;
+      impactList.appendChild(row);
+    });
+
+    impactList.querySelectorAll(".vrow-title input").forEach((input) => {
+      input.addEventListener("blur", async () => {
+        const id = input.dataset.id;
+        try {
+          await db.collection("impact").doc(id).update({ caption: input.value.trim() || null });
+        } catch (e) {
+          console.error(e);
+        }
+      });
+    });
+
+    impactList.querySelectorAll("[data-delete-impact]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        if (!confirm("متأكد إنك عايز تمسح الصورة دي؟")) return;
+        try {
+          await db.collection("impact").doc(btn.dataset.deleteImpact).delete();
+          loadImpactList();
+        } catch (e) {
+          console.error(e);
+        }
+      });
+    });
+  } catch (e) {
+    console.error(e);
+    impactList.innerHTML = `<p class="admin-sub">حصل خطأ في تحميل الصور.</p>`;
+  }
+}
+
 /* ---------- إدارة الفيديوهات ---------- */
 const videoForm = document.getElementById("videoForm");
 const videoUrlInput = document.getElementById("videoUrlInput");
@@ -121,13 +210,20 @@ const videoTitleInput = document.getElementById("videoTitleInput");
 const videoMsg = document.getElementById("videoMsg");
 const videosList = document.getElementById("videosList");
 
-/* لما يلزق اللينك، نحاول نجيب العنوان تلقائي لو يوتيوب */
+/* لما يلزق اللينك، نحاول نجيب العنوان تلقائي لو يوتيوب أو تيك توك */
 videoUrlInput.addEventListener("blur", async () => {
   const parsed = parseVideoUrl(videoUrlInput.value);
   if (!parsed) return;
-  if (parsed.platform === "youtube" && !videoTitleInput.value.trim()) {
+  if (videoTitleInput.value.trim()) return;
+
+  if (parsed.platform === "youtube") {
     videoTitleInput.placeholder = "بيجيب العنوان...";
     const title = await fetchYoutubeTitle(parsed.watchUrl);
+    if (title) videoTitleInput.value = title;
+    videoTitleInput.placeholder = "عنوان الفيديو";
+  } else if (parsed.platform === "tiktok") {
+    videoTitleInput.placeholder = "بيجيب العنوان...";
+    const title = await fetchTiktokTitle(parsed.watchUrl);
     if (title) videoTitleInput.value = title;
     videoTitleInput.placeholder = "عنوان الفيديو";
   }
@@ -149,7 +245,8 @@ videoForm.addEventListener("submit", async (e) => {
       url: videoUrlInput.value.trim(),
       platform: parsed.platform,
       embedId: parsed.embedId,
-      embedUrl: parsed.embedUrl,
+      embedUrl: parsed.embedUrl || null,
+      permalink: parsed.permalink || null,
       title: videoTitleInput.value.trim() || "بدون عنوان",
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
@@ -181,7 +278,7 @@ async function loadVideosList() {
       const row = document.createElement("div");
       row.className = "video-row";
       row.innerHTML = `
-        <div class="thumb">${v.platform === "youtube" ? "YT" : "Drive"}</div>
+        <div class="thumb">${v.platform === "youtube" ? "YT" : v.platform === "tiktok" ? "TikTok" : "Drive"}</div>
         <div class="vrow-title">
           <input type="text" value="${(v.title || "").replace(/"/g, "&quot;")}" data-id="${doc.id}"/>
           <span class="platform-tag">${v.platform}</span>
