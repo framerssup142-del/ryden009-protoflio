@@ -58,20 +58,35 @@ async function loadContentForm() {
   }
 }
 
-/* بيصغّر الصورة ويحوّلها base64 عشان تتخزن في المستند من غير ما نحتاج Firebase Storage */
-function compressImage(file, maxW = 700, quality = 0.82) {
+/* بيصغّر الصورة ويحوّلها base64 عشان تتخزن في المستند من غير ما نحتاج Firebase Storage.
+   بيقلل الجودة تلقائيًا لو الصورة لسه كبيرة عشان متتخطاش حد الـ 1MB بتاع Firestore. */
+function compressImage(file, maxW = 800, quality = 0.8) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = (e) => {
       const img = new Image();
       img.onload = () => {
-        const scale = Math.min(1, maxW / img.width);
-        const canvas = document.createElement("canvas");
-        canvas.width = img.width * scale;
-        canvas.height = img.height * scale;
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        resolve(canvas.toDataURL("image/jpeg", quality));
+        let w = maxW;
+        let q = quality;
+        const render = () => {
+          const scale = Math.min(1, w / img.width);
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width * scale;
+          canvas.height = img.height * scale;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          return canvas.toDataURL("image/jpeg", q);
+        };
+        let dataUrl = render();
+        // Firestore doc limit ~1MB — نسيب هامش أمان تحت 700KB
+        let guard = 0;
+        while (dataUrl.length > 700000 && guard < 6) {
+          if (q > 0.4) q -= 0.1;
+          else w = Math.round(w * 0.8);
+          dataUrl = render();
+          guard++;
+        }
+        resolve(dataUrl);
       };
       img.onerror = reject;
       img.src = e.target.result;
@@ -108,7 +123,7 @@ contentForm.addEventListener("submit", async (e) => {
     setTimeout(() => contentMsg.classList.remove("show"), 3000);
   } catch (err) {
     console.error(err);
-    contentMsg.textContent = "حصل خطأ، جرب تاني";
+    contentMsg.textContent = "حصل خطأ: " + (err.message || "جرب تاني");
     contentMsg.className = "msg err show";
   } finally {
     btn.disabled = false;
@@ -119,6 +134,7 @@ contentForm.addEventListener("submit", async (e) => {
 const impactForm = document.getElementById("impactForm");
 const impactImageInput = document.getElementById("impactImageInput");
 const impactCaptionInput = document.getElementById("impactCaptionInput");
+const impactVideoLinkInput = document.getElementById("impactVideoLinkInput");
 const impactMsg = document.getElementById("impactMsg");
 const impactList = document.getElementById("impactList");
 
@@ -134,6 +150,7 @@ impactForm.addEventListener("submit", async (e) => {
     await db.collection("impact").add({
       imageURL: dataUrl,
       caption: impactCaptionInput.value.trim() || null,
+      videoLink: impactVideoLinkInput.value.trim() || null,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     impactForm.reset();
@@ -143,7 +160,7 @@ impactForm.addEventListener("submit", async (e) => {
     loadImpactList();
   } catch (err) {
     console.error(err);
-    impactMsg.textContent = "حصل خطأ في الإضافة";
+    impactMsg.textContent = "حصل خطأ: " + (err.message || "جرب تاني");
     impactMsg.className = "msg err show";
   } finally {
     btn.disabled = false;
@@ -166,7 +183,8 @@ async function loadImpactList() {
       row.innerHTML = `
         <div class="thumb-img"><img src="${d.imageURL}"/></div>
         <div class="vrow-title">
-          <input type="text" value="${(d.caption || "").replace(/"/g, "&quot;")}" placeholder="بدون وصف" data-id="${doc.id}"/>
+          <input type="text" value="${(d.caption || "").replace(/"/g, "&quot;")}" placeholder="بدون وصف" data-caption-id="${doc.id}"/>
+          <input type="text" value="${(d.videoLink || "").replace(/"/g, "&quot;")}" placeholder="لينك الفيديو (اختياري)" data-link-id="${doc.id}" style="margin-top:4px"/>
         </div>
         <div class="vrow-actions">
           <button class="icon-btn danger" data-delete-impact="${doc.id}" title="حذف">✕</button>
@@ -175,11 +193,22 @@ async function loadImpactList() {
       impactList.appendChild(row);
     });
 
-    impactList.querySelectorAll(".vrow-title input").forEach((input) => {
+    impactList.querySelectorAll("[data-caption-id]").forEach((input) => {
       input.addEventListener("blur", async () => {
-        const id = input.dataset.id;
+        const id = input.dataset.captionId;
         try {
           await db.collection("impact").doc(id).update({ caption: input.value.trim() || null });
+        } catch (e) {
+          console.error(e);
+        }
+      });
+    });
+
+    impactList.querySelectorAll("[data-link-id]").forEach((input) => {
+      input.addEventListener("blur", async () => {
+        const id = input.dataset.linkId;
+        try {
+          await db.collection("impact").doc(id).update({ videoLink: input.value.trim() || null });
         } catch (e) {
           console.error(e);
         }
@@ -257,7 +286,7 @@ videoForm.addEventListener("submit", async (e) => {
     loadVideosList();
   } catch (err) {
     console.error(err);
-    videoMsg.textContent = "حصل خطأ في الإضافة";
+    videoMsg.textContent = "حصل خطأ: " + (err.message || "جرب تاني");
     videoMsg.className = "msg err show";
   } finally {
     btn.disabled = false;

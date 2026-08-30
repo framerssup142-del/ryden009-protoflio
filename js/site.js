@@ -85,10 +85,17 @@ async function loadImpact() {
     grid.innerHTML = "";
     snap.forEach((doc) => {
       const d = doc.data();
-      const card = document.createElement("div");
+      const hasLink = !!d.videoLink;
+      const card = document.createElement(hasLink ? "a" : "div");
       card.className = "impact-card reveal";
+      if (hasLink) {
+        card.href = d.videoLink;
+        card.target = "_blank";
+        card.rel = "noopener";
+      }
       card.innerHTML = `
         <span class="impact-badge">Proof</span>
+        ${hasLink ? `<span class="impact-play">▶</span>` : ""}
         <img src="${d.imageURL}" alt="${d.caption || "نتيجة شغل"}" loading="lazy"/>
         ${d.caption ? `<div class="impact-caption">${d.caption}</div>` : ""}
       `;
@@ -166,3 +173,20 @@ document.addEventListener("DOMContentLoaded", () => {
   loadVideos();
   initReveal();
 });
+
+/* ---------- دخول سري للوحة التحكم ----------
+   اكتب "ryden" في أي وقت وانت في الصفحة (من غير ما تكون داخل حقل كتابة)
+   وهيودّيك لـ admin.html من غير أي لينك ظاهر للزوار */
+(function secretAdminAccess() {
+  const SECRET = "ryden";
+  let buffer = "";
+  document.addEventListener("keydown", (e) => {
+    const tag = (document.activeElement && document.activeElement.tagName) || "";
+    if (tag === "INPUT" || tag === "TEXTAREA") return; // مايشتغلش وانت بتكتب في فورم
+    if (e.key.length !== 1) return; // تجاهل Shift, Enter... إلخ
+    buffer = (buffer + e.key.toLowerCase()).slice(-SECRET.length);
+    if (buffer === SECRET) {
+      window.location.href = "admin.html";
+    }
+  });
+})();
