@@ -2,115 +2,281 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>رياض إبراهيم (Ryden) — Video Editor & Content Creator</title>
-  <meta name="description" content="رياض إبراهيم (رايدن) — Video Editor وصانع محتوى، بساعدك تكون نفسك على السوشيال ميديا."/>
-  <link rel="icon" type="image/png" href="assets/images/logo.png"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <title>رياض إبراهيم (رايدن) | Video Editor</title>
+  <meta name="description" content="رياض إبراهيم (رايدن)، Video Editor وصانع محتوى. مونتاج Reels و Shorts وموشن جرافيك يوقّف السكرول ويخلّي الناس تتفرج للآخر."/>
+  <meta name="theme-color" content="#1C1C1F"/>
 
+  <!-- معاينة اللينك لما يتبعت على واتساب / فيسبوك.
+       بعد ما ترفع الموقع، غيّر og:image للينك الكامل للصورة (مثلًا https://USERNAME.github.io/REPO/assets/images/profile.jpg) -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:locale" content="ar_EG"/>
+  <meta property="og:title" content="رياض إبراهيم (رايدن) | Video Editor"/>
+  <meta property="og:description" content="مونتاج يوقّف السكرول. شوف شغلي وابعتلي فكرتك على واتساب."/>
+  <meta property="og:image" content="assets/images/profile.jpg"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+
+  <link rel="icon" type="image/png" href="assets/images/logo.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;900&family=Lalezar&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@500;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Unbounded:wght@600;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css?v=4"/>
 </head>
-<body>
+<body class="is-loading">
 
-  <!-- Timeline scrubber: مؤشر تمرير على شكل تايم لاين مونتاج -->
-  <div class="scrubber">
-    <span class="scrubber-brand">Ryden<span>.</span></span>
-    <div class="scrubber-track">
-      <div class="scrubber-ticks">
-        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  <!-- أيقونات الموقع -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-wa" viewBox="0 0 32 32"><path fill="currentColor" d="M16.001 3.2c-7.07 0-12.8 5.73-12.8 12.8 0 2.257.591 4.377 1.626 6.213L3.2 28.8l6.756-1.593a12.73 12.73 0 006.045 1.539h.006c7.07 0 12.8-5.73 12.8-12.8s-5.73-12.746-12.806-12.746zm0 23.36a10.53 10.53 0 01-5.37-1.47l-.385-.229-4.008.945.955-3.906-.251-.4a10.545 10.545 0 01-1.622-5.634c0-5.834 4.75-10.583 10.586-10.583 5.834 0 10.583 4.75 10.583 10.589 0 5.834-4.75 10.583-10.588 10.688zm5.797-7.926c-.317-.159-1.877-.926-2.168-1.032-.29-.106-.502-.159-.714.159-.211.317-.818 1.032-1.003 1.243-.185.211-.37.238-.687.079-.317-.159-1.339-.494-2.55-1.573-.943-.841-1.58-1.881-1.765-2.198-.185-.317-.02-.489.139-.647.143-.143.317-.37.476-.556.159-.185.211-.317.317-.529.106-.211.053-.397-.026-.556-.079-.159-.714-1.721-.978-2.359-.257-.617-.518-.533-.714-.543-.185-.01-.396-.011-.608-.011-.211 0-.556.079-.847.397-.29.317-1.111 1.085-1.111 2.647s1.137 3.071 1.296 3.283c.159.211 2.237 3.417 5.42 4.793.757.327 1.348.522 1.809.668.76.242 1.452.208 1.999.126.61-.091 1.877-.767 2.142-1.508.264-.741.264-1.376.185-1.508-.079-.132-.29-.211-.607-.37z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M3 6l9 7 9-7"/></g></symbol>
+    <symbol id="i-tiktok" viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 5.82c-1.003-.985-1.564-2.328-1.564-3.82h-3.19v13.5c0 1.53-1.24 2.77-2.77 2.77s-2.77-1.24-2.77-2.77 1.24-2.77 2.77-2.77c.29 0 .56.04.82.12V9.7a6.02 6.02 0 00-.82-.06 5.96 5.96 0 100 11.92 5.96 5.96 0 005.96-5.96V8.36a9.09 9.09 0 005.32 1.7V6.87a5.53 5.53 0 01-3.76-1.05z"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".6" fill="currentColor"/></g></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12.06C22 6.505 17.523 2 12 2S2 6.505 2 12.06c0 5.02 3.657 9.184 8.438 9.94v-7.03H7.898v-2.91h2.54V9.845c0-2.508 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562v1.877h2.773l-.443 2.91h-2.33V22c4.78-.756 8.437-4.92 8.437-9.94z"/></symbol>
+    <symbol id="i-yt" viewBox="0 0 24 24"><path fill="currentColor" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.2v13.6a.8.8 0 0 0 1.2.7l10.6-6.8a.8.8 0 0 0 0-1.4L9.2 4.5a.8.8 0 0 0-1.2.7z"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/></symbol>
+    <symbol id="i-ext" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M14 4h6v6M20 4l-9 9M19 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4"/></symbol>
+  </svg>
+
+  <a class="skip" href="#works">انتقل للشغل</a>
+
+  <!-- ============ الشريط العلوي ============ -->
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="رايدن، الرجوع لأول الصفحة">
+      <span class="brand-ring" aria-hidden="true"></span>
+      <span class="brand-word">RYDEN</span>
+    </a>
+    <a class="btn btn-gold btn-sm" href="https://wa.me/201104792386" target="_blank" rel="noopener">
+      <svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg>
+      <span>ابعتلي على واتساب</span>
+    </a>
+  </header>
+
+  <main>
+    <!-- ============ البداية ============ -->
+    <section class="hero" id="top" data-clip="البداية">
+      <div class="hero-text">
+        <p class="hero-id"><b id="heroName">رياض إبراهيم (رايدن)</b><span id="heroRole">Video Editor وصانع محتوى مهتم بالـ AI</span></p>
+        <h1 class="hero-headline" id="heroHeadline">مونتاج يوقّف السكرول.</h1>
+        <p class="hero-tagline" id="heroTagline">بساعدك تكون نفسك على السوشيال ميديا، بفيديوهات فيها Hook وقصة وإيقاع يخلّوا الناس تتفرج للآخر.</p>
+        <div class="hero-cta">
+          <a class="btn btn-gold" href="https://wa.me/201104792386" target="_blank" rel="noopener">
+            <svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg>
+            <span>ابعتلي على واتساب</span>
+          </a>
+          <a class="btn btn-ghost" href="#works">شوف شغلي</a>
+        </div>
+        <p class="hero-clients" id="heroClients" hidden>اشتغلت مع <span id="heroClientsList"></span></p>
       </div>
-      <div class="scrubber-fill" id="scrubberFill"></div>
-      <div class="scrubber-head" id="scrubberHead"></div>
-    </div>
-    <span class="scrubber-tc" id="scrubberTC">00:00:00:00</span>
-  </div>
 
-  <!-- ============ HERO ============ -->
-  <section class="hero">
-    <div class="hero-photo-wrap">
-      <div class="hero-photo">
-        <img id="heroPhoto" src="assets/images/profile.jpg" alt="رياض إبراهيم"/>
+      <!-- شاشة العرض: الصورة بتظهر "خام" وبعدين بتتلوّن زي ما بيحصل في الـ Color Grading -->
+      <figure class="monitor" id="monitor">
+        <img class="mon-img mon-log js-photo" src="assets/images/profile.jpg" alt="" aria-hidden="true" decoding="async"/>
+        <div class="mon-grade">
+          <img class="mon-img js-photo" id="heroPhoto" src="assets/images/profile.jpg" alt="رياض إبراهيم (رايدن)" decoding="async" fetchpriority="high"/>
+        </div>
+        <span class="mon-wipe" aria-hidden="true"></span>
+        <span class="safe safe-a" aria-hidden="true"></span>
+        <span class="safe safe-b" aria-hidden="true"></span>
+        <span class="safe safe-c" aria-hidden="true"></span>
+        <span class="safe safe-d" aria-hidden="true"></span>
+        <span class="mon-tc js-tc" aria-hidden="true">00:00:00:00</span>
+      </figure>
+    </section>
+
+    <!-- ============ التايم لاين: أقسام الصفحة على شكل كليبات ============ -->
+    <div class="tl-wrap">
+      <div class="tl" id="timeline">
+        <div class="tl-heads" aria-hidden="true"><span></span><span>V1</span><span>A1</span></div>
+        <div class="tl-body">
+          <div class="tl-ruler" aria-hidden="true"><div class="tl-ruler-labels"></div><div class="tl-render"><i></i></div></div>
+          <nav class="tl-v js-clips" aria-label="أقسام الصفحة">
+            <a class="clip" href="#top">البداية</a>
+            <a class="clip" href="#works">شغلي</a>
+            <a class="clip" href="#results">النتايج</a>
+            <a class="clip" href="#about">عني</a>
+            <a class="clip" href="#services">الخدمات</a>
+            <a class="clip" href="#contact">تواصل</a>
+          </nav>
+          <div class="tl-a" aria-hidden="true"></div>
+          <span class="tl-playhead" aria-hidden="true"></span>
+        </div>
       </div>
     </div>
-    <h1 class="hero-name" id="heroName">رياض إبراهيم <span class="accent">(رايدن)</span></h1>
-    <p class="hero-role" id="heroRole">Video Editor · صانع محتوى · مهتم بالـ AI</p>
-    <p class="hero-tagline" id="heroTagline">بساعدك تكون نفسك على السوشيال ميديا</p>
 
-    <div class="hero-scroll">
-      <span class="dot"></span>
-      <span>Scroll</span>
+    <!-- ============ شغلي ============ -->
+    <section class="sec" id="works" data-clip="شغلي">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>شغلي</h2>
+          <p>فيديوهات عملتها لعملاء في مجالات مختلفة. اختار المجال اللي يهمك واضغط على أي فيديو عشان تشغّله.</p>
+        </div>
+
+        <button class="reel" id="reel" type="button" hidden>
+          <img class="reel-img" alt="" aria-hidden="true"/>
+          <span class="safe safe-a" aria-hidden="true"></span>
+          <span class="safe safe-b" aria-hidden="true"></span>
+          <span class="safe safe-c" aria-hidden="true"></span>
+          <span class="safe safe-d" aria-hidden="true"></span>
+          <span class="reel-text">
+            <span class="reel-title">Showreel</span>
+            <span class="reel-sub">أحسن لقطات من شغلي في فيديو واحد. ابدأ من هنا.</span>
+          </span>
+          <span class="reel-play" aria-hidden="true"><svg class="ic"><use href="#i-play"/></svg></span>
+        </button>
+
+        <div class="filters" id="filters" role="group" aria-label="فلترة الشغل حسب المجال" hidden></div>
+
+        <div class="grid" id="worksGrid" aria-live="polite">
+          <div class="work is-skel" aria-hidden="true"></div>
+          <div class="work is-skel" aria-hidden="true"></div>
+          <div class="work is-skel" aria-hidden="true"></div>
+          <div class="work is-skel" aria-hidden="true"></div>
+        </div>
+        <p class="empty" id="worksEmpty" hidden>الفيديوهات مش ظاهرة دلوقتي. حدّث الصفحة، أو شوف شغلي على <a href="https://www.tiktok.com/@ryden099" target="_blank" rel="noopener">تيك توك</a>.</p>
+      </div>
+    </section>
+
+    <!-- ============ النتايج ============ -->
+    <section class="sec" id="results" data-clip="النتايج">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>النتايج</h2>
+          <p>أرقام حقيقية من فيديوهات اشتغلت عليها مع العملاء.</p>
+        </div>
+        <div class="results-body" id="resultsBody">
+          <div class="stats" id="stats"></div>
+          <div class="shots" id="shots" hidden></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ عني ============ -->
+    <section class="sec" id="about" data-clip="عني">
+      <div class="wrap about">
+        <div class="about-text">
+          <h2 class="about-title">مين رايدن؟</h2>
+          <p class="about-quote" id="bioQuote">المونتاج عندي مش قص ولزق. هو السبب اللي يخلّي حد يوقف السكرول ويتفرج.</p>
+          <div class="about-bio" id="bioBody">
+            <p>أنا رياض إبراهيم، والناس تعرفني باسم «رايدن». Video Editor وصانع محتوى، وشغلي إني آخد الفيديو الخام وأطلع منه حاجة الناس تكمّلها للآخر.</p>
+            <p>من أكتر من 4 سنين وأنا بعمل مونتاج لأكتر من 36 عميل في مجالات مختلفة: فيتنس، طب، عقارات، تطوير ذات، وبراندات. والفيديوهات اللي اشتغلت عليها عدّت 6 مليون مشاهدة. ومع الوقت فهمت إن المونتاج الحلو لوحده مش كفاية؛ لازم تفهم الفيديو بينجح ليه، من الـ Hook في أول ثانية، للـ Storytelling، لحد إمتى وإزاي ينزل.</p>
+            <p>النهارده بدمج المونتاج مع الـ AI، وببني workflows تخلّي صناع المحتوى والبراندات ينتجوا أسرع وأذكى من غير ما الجودة تقل.</p>
+            <p>هدفي بسيط: محتوى ميبقاش شكله حلو وبس، يبقى عنده سبب حقيقي يخلّي الناس توقف وتتفرج وتتفاعل.</p>
+          </div>
+        </div>
+
+        <aside class="meta" aria-label="معلومات سريعة">
+          <dl>
+            <div><dt>الاسم</dt><dd>رياض إبراهيم</dd></div>
+            <div><dt>اسم الشهرة</dt><dd>رايدن (Ryden)</dd></div>
+            <div id="metaExpRow" hidden><dt>الخبرة</dt><dd id="metaExp"></dd></div>
+            <div id="metaNichesRow" hidden><dt>المجالات</dt><dd id="metaNiches"></dd></div>
+            <div id="metaToolsRow" hidden><dt>البرامج</dt><dd id="metaTools"></dd></div>
+            <div><dt>الحالة</dt><dd><span class="status-dot" aria-hidden="true"></span><span id="metaAvail">متاح لمشاريع جديدة</span></dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ الخدمات ============ -->
+    <section class="sec" id="services" data-clip="الخدمات">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>بعمل إيه</h2>
+          <p>من أول الفكرة لحد الفيديو الجاهز للنشر.</p>
+        </div>
+        <div class="svc-list" id="servicesList">
+          <div class="svc"><h3>مونتاج Reels و Shorts</h3><p>Hook في أول تلات ثواني، إيقاع سريع، كابشنز وساوند ديزاين يخلّوا الفيديو يتشاف للآخر.</p></div>
+          <div class="svc"><h3>موشن جرافيك</h3><p>عناوين متحركة وشرح بصري وأنيميشن بسيط يدّي البراند بتاعك شكل احترافي.</p></div>
+          <div class="svc"><h3>Hook و Storytelling</h3><p>قبل المونتاج بفكر معاك في الفكرة وأول جملة وترتيب القصة، عشان الفيديو يبدأ قوي ويفضل ماسك المتفرج.</p></div>
+          <div class="svc"><h3>AI Workflows</h3><p>بستخدم أدوات الذكاء الاصطناعي عشان أنتج أسرع وأطلّع محتوى أكتر بنفس الجودة.</p></div>
+        </div>
+
+        <h3 class="steps-title">إزاي بنشتغل</h3>
+        <ol class="steps">
+          <li class="step"><span class="step-clip"><b>1</b></span><h4>تبعتلي الفكرة</h4><p>تكلمني على واتساب وتقولي الهدف، والجمهور، والمادة اللي عندك.</p></li>
+          <li class="step"><span class="step-clip"><b>2</b></span><h4>نخطط للـ Hook والقصة</h4><p>نتفق على أول ثواني في الفيديو وترتيبه قبل ما أبدأ.</p></li>
+          <li class="step"><span class="step-clip"><b>3</b></span><h4>المونتاج</h4><p>قص وإيقاع وكابشنز وموشن وصوت، لحد ما الفيديو يبقى جاهز.</p></li>
+          <li class="step"><span class="step-clip"><b>4</b></span><h4>التسليم والتعديلات</h4><p>بتستلم النسخة النهائية بمقاس كل منصة، وتقولي ملاحظاتك ونظبطها.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ تواصل ============ -->
+    <section class="sec sec-contact" id="contact" data-clip="تواصل">
+      <div class="wrap">
+        <h2 class="contact-title">عندك فيديو محتاج يتشاف؟</h2>
+        <p class="contact-sub">ابعتلي الفكرة على واتساب ونتكلم فيها.</p>
+        <div class="contact-cta">
+          <a class="btn btn-gold btn-lg" href="https://wa.me/201104792386" target="_blank" rel="noopener">
+            <svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg>
+            <span>ابعتلي على واتساب</span>
+          </a>
+          <a class="btn btn-ghost btn-lg" href="mailto:framers.sup142@gmail.com">
+            <svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg>
+            <span>ابعتلي إيميل</span>
+          </a>
+        </div>
+        <ul class="socials">
+          <li><a href="https://www.tiktok.com/@ryden099" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-tiktok"/></svg><span>تيك توك</span><bdi>@ryden099</bdi></a></li>
+          <li><a href="https://www.instagram.com/ryden009/" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg><span>انستجرام</span><bdi>@ryden009</bdi></a></li>
+          <li><a href="https://www.facebook.com/riyadaloqbe101" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-fb"/></svg><span>فيسبوك</span></a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-word" aria-hidden="true">RYDEN</p>
+    <div class="foot-line">
+      <span>© <span id="year">2026</span> رياض إبراهيم (رايدن)</span>
+      <a href="#top">ارجع لأول الصفحة</a>
     </div>
-  </section>
-
-  <!-- ============ ABOUT ============ -->
-  <section class="section container" id="about">
-    <span class="sec-eyebrow">نبذة عني</span>
-    <h2 class="sec-title">مين رياض؟</h2>
-    <div class="about-body" id="bioBody">
-      <!-- محتوى يتحمّل من Firestore عبر site.js -->
-      <p class="reveal">أنا رياض إبراهيم (رايدن)، Video Editor وصانع محتوى مهتم بتطوير صناعة المحتوى من خلال الجمع بين الإبداع، المونتاج، والذكاء الاصطناعي.</p>
-      <p class="reveal">بدأت رحلتي في صناعة المحتوى والمونتاج من سنين، وخلال رحلتي اشتغلت على محتوى لمجالات مختلفة، وساعدت في صناعة فيديوهات وصلت لملايين المشاهدات. ومع الوقت، لم يعد اهتمامي مقتصرًا على المونتاج فقط، بل أصبحت مهتمًا بفهم كيف ولماذا ينجح المحتوى؛ بدايةً من الـHook والـStorytelling وحتى استراتيجية توزيع المحتوى.</p>
-      <p class="reveal">حاليًا أركز على استغلال AI لتطوير طريقة صناعة المحتوى، وبناء workflows تساعد صناع المحتوى والبراندات على إنتاج محتوى أسرع، أذكى، وأكثر تميزًا.</p>
-      <p class="reveal">هدفي ببساطة: أن أصنع محتوى لا يكتفي بأن يبدو جيدًا، بل يكون لديه سبب حقيقي يجعل الناس تتوقف، تشاهد، وتتفاعل.</p>
-    </div>
-  </section>
-
-  <!-- ============ IMPACT / PROOF ============ -->
-  <section class="section container" id="impact">
-    <span class="sec-eyebrow">الأرقام بتتكلم</span>
-    <h2 class="sec-title">تأثير شغلي على محتوى العملاء</h2>
-    <p class="impact-sub">لقطات حقيقية من نتائج فيديوهات اشتغلت عليها — من عدد المشاهدات لحد التفاعل.</p>
-    <div class="impact-grid" id="impactGrid">
-      <p class="videos-empty">جاري التحميل...</p>
-    </div>
-  </section>
-
-  <!-- ============ VIDEOS ============ -->
-  <section class="section container" id="works">
-    <span class="sec-eyebrow">شغلي</span>
-    <h2 class="sec-title">فيديوهات من الشغل</h2>
-    <div class="videos-grid" id="videosGrid">
-      <p class="videos-empty">جاري تحميل الفيديوهات...</p>
-    </div>
-  </section>
-
-  <!-- ============ CONTACT ============ -->
-  <section class="section container" id="contact">
-    <span class="sec-eyebrow">تواصل معايا</span>
-    <h2 class="sec-title">جاهز نشتغل مع بعض؟</h2>
-    <div class="social-row social-row-lg">
-      <a href="https://wa.me/201104792386" target="_blank" rel="noopener" aria-label="WhatsApp" class="social-ic wa">
-        <svg width="24" height="24" viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 3.2c-7.07 0-12.8 5.73-12.8 12.8 0 2.257.591 4.377 1.626 6.213L3.2 28.8l6.756-1.593a12.73 12.73 0 006.045 1.539h.006c7.07 0 12.8-5.73 12.8-12.8s-5.73-12.746-12.806-12.746zm0 23.36a10.53 10.53 0 01-5.37-1.47l-.385-.229-4.008.945.955-3.906-.251-.4a10.545 10.545 0 01-1.622-5.634c0-5.834 4.75-10.583 10.586-10.583 5.834 0 10.583 4.75 10.583 10.589 0 5.834-4.75 10.583-10.588 10.688zm5.797-7.926c-.317-.159-1.877-.926-2.168-1.032-.29-.106-.502-.159-.714.159-.211.317-.818 1.032-1.003 1.243-.185.211-.37.238-.687.079-.317-.159-1.339-.494-2.55-1.573-.943-.841-1.58-1.881-1.765-2.198-.185-.317-.02-.489.139-.647.143-.143.317-.37.476-.556.159-.185.211-.317.317-.529.106-.211.053-.397-.026-.556-.079-.159-.714-1.721-.978-2.359-.257-.617-.518-.533-.714-.543-.185-.01-.396-.011-.608-.011-.211 0-.556.079-.847.397-.29.317-1.111 1.085-1.111 2.647s1.137 3.071 1.296 3.283c.159.211 2.237 3.417 5.42 4.793.757.327 1.348.522 1.809.668.76.242 1.452.208 1.999.126.61-.091 1.877-.767 2.142-1.508.264-.741.264-1.376.185-1.508-.079-.132-.29-.211-.607-.37z"/></svg>
-      </a>
-      <a href="mailto:framers.sup142@gmail.com" aria-label="Email" class="social-ic em">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      </a>
-      <a href="https://www.tiktok.com/@ryden099" target="_blank" rel="noopener" aria-label="TikTok" class="social-ic tk">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82c-1.003-.985-1.564-2.328-1.564-3.82h-3.19v13.5c0 1.53-1.24 2.77-2.77 2.77s-2.77-1.24-2.77-2.77 1.24-2.77 2.77-2.77c.29 0 .56.04.82.12V9.7a6.02 6.02 0 00-.82-.06 5.96 5.96 0 100 11.92 5.96 5.96 0 005.96-5.96V8.36a9.09 9.09 0 005.32 1.7V6.87a5.53 5.53 0 01-3.76-1.05z"/></svg>
-      </a>
-      <a href="https://www.facebook.com/riyadaloqbe101" target="_blank" rel="noopener" aria-label="Facebook" class="social-ic fb">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.505 17.523 2 12 2S2 6.505 2 12.06c0 5.02 3.657 9.184 8.438 9.94v-7.03H7.898v-2.91h2.54V9.845c0-2.508 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562v1.877h2.773l-.443 2.91h-2.33V22c4.78-.756 8.437-4.92 8.437-9.94z"/></svg>
-      </a>
-      <a href="https://www.instagram.com/ryden009/" target="_blank" rel="noopener" aria-label="Instagram" class="social-ic ig">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-      </a>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div>© <span id="year"></span> رياض إبراهيم — Ryden</div>
   </footer>
 
-  <!-- Firebase (compat SDK — مفيش حاجة تتبني، سكريبت تاج عادي) -->
+  <!-- ============ الشريط الثابت (بيظهر لما تنزل تحت) ============ -->
+  <div class="dock" id="dock" aria-hidden="true" inert>
+    <a class="brand brand-sm" href="#top" aria-label="رايدن، الرجوع لأول الصفحة"><span class="brand-ring" aria-hidden="true"></span><span class="brand-word">RYDEN</span></a>
+    <div class="dock-track">
+      <div class="tl-render dock-render"><i></i></div>
+      <nav class="tl-v js-clips" aria-label="أقسام الصفحة"></nav>
+      <span class="tl-playhead" aria-hidden="true"></span>
+    </div>
+    <span class="dock-tc js-tc">00:00:00:00</span>
+    <a class="btn btn-gold btn-icon" href="https://wa.me/201104792386" target="_blank" rel="noopener" aria-label="ابعتلي على واتساب">
+      <svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg>
+    </a>
+  </div>
+
+  <!-- ============ مشغّل الفيديو ============ -->
+  <dialog class="player" id="player" aria-labelledby="playerClient">
+    <div class="player-inner">
+      <button class="player-close" type="button" id="playerClose" aria-label="اقفل الفيديو">
+        <svg class="ic" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+      <div class="player-frame" id="playerFrame"></div>
+      <div class="player-bar">
+        <button class="player-nav" type="button" id="playerPrev" aria-label="الفيديو اللي قبله">
+          <svg class="ic" aria-hidden="true"><use href="#i-right"/></svg>
+        </button>
+        <div class="player-info">
+          <p class="player-client" id="playerClient"></p>
+          <p class="player-meta"><i id="playerDot"></i><span id="playerCat"></span><a id="playerOpen" target="_blank" rel="noopener">افتح على <span id="playerPlat"></span><svg class="ic" aria-hidden="true"><use href="#i-ext"/></svg></a></p>
+        </div>
+        <button class="player-nav" type="button" id="playerNext" aria-label="الفيديو اللي بعده">
+          <svg class="ic" aria-hidden="true"><use href="#i-left"/></svg>
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Firebase (compat SDK). الصفحة الرئيسية محتاجة Firestore بس، مش محتاجة Auth -->
   <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
 
-  <script src="js/firebase-config.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/site.js"></script>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="js/firebase-config.js?v=4"></script>
+  <script src="js/utils.js?v=4"></script>
+  <script src="js/site.js?v=4"></script>
 </body>
 </html>

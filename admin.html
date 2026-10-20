@@ -2,126 +2,189 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>لوحة التحكم — Ryden</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>لوحة التحكم | Ryden</title>
   <meta name="robots" content="noindex, nofollow"/>
+  <meta name="theme-color" content="#1C1C1F"/>
+  <link rel="icon" type="image/png" href="assets/images/logo.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;900&family=Lalezar&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Unbounded:wght@800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css?v=4"/>
+  <link rel="stylesheet" href="css/admin.css?v=4"/>
 </head>
-<body>
-  <div class="admin-wrap">
-    <div class="admin-narrow" id="loginCard">
-      <div class="admin-card">
-        <h1>لوحة التحكم</h1>
-        <p class="admin-sub">سجل دخولك عشان تقدر تعدل محتوى الموقع والفيديوهات</p>
-        <form id="loginForm">
-          <div class="field">
-            <label>الإيميل</label>
-            <input type="email" id="loginEmail" required/>
-          </div>
-          <div class="field">
-            <label>الباسورد</label>
-            <input type="password" id="loginPass" required/>
-          </div>
-          <button type="submit" class="btn btn-full">دخول</button>
-          <div class="msg" id="loginMsg"></div>
-        </form>
-      </div>
+<body class="adm">
+
+  <!-- ============ تسجيل الدخول ============ -->
+  <main class="login" id="loginView" hidden>
+    <div class="login-card">
+      <a class="brand" href="index.html"><span class="brand-ring" aria-hidden="true"></span><span class="brand-word">RYDEN</span></a>
+      <h1>لوحة التحكم</h1>
+      <p class="muted">سجّل دخولك عشان تعدّل محتوى الموقع والفيديوهات.</p>
+      <form id="loginForm" novalidate>
+        <label class="field"><span>الإيميل</span><input type="email" id="loginEmail" autocomplete="username" required/></label>
+        <label class="field"><span>الباسورد</span><input type="password" id="loginPass" autocomplete="current-password" required/></label>
+        <button type="submit" class="btn btn-gold btn-block">سجّل دخول</button>
+        <p class="msg" id="loginMsg" role="alert"></p>
+      </form>
     </div>
+  </main>
 
-    <div class="container" id="panelCard" style="display:none;max-width:760px">
-      <div class="admin-topbar">
-        <h1>لوحة التحكم</h1>
-        <button class="btn btn-outline" id="logoutBtn">تسجيل خروج</button>
+  <!-- ============ اللوحة ============ -->
+  <div class="panel-view" id="panelView" hidden>
+    <header class="adm-top">
+      <a class="brand" href="index.html" target="_blank" rel="noopener"><span class="brand-ring" aria-hidden="true"></span><span class="brand-word">RYDEN</span></a>
+      <nav class="tabs" role="tablist" aria-label="أقسام لوحة التحكم">
+        <button class="tab" role="tab" id="tab-content" aria-controls="pane-content" aria-selected="true">المحتوى</button>
+        <button class="tab" role="tab" id="tab-works" aria-controls="pane-works" aria-selected="false">الشغل</button>
+        <button class="tab" role="tab" id="tab-results" aria-controls="pane-results" aria-selected="false">النتايج</button>
+      </nav>
+      <div class="adm-top-actions">
+        <a class="btn btn-ghost btn-sm" href="index.html" target="_blank" rel="noopener">شوف الموقع</a>
+        <button class="btn btn-ghost btn-sm" id="logoutBtn" type="button">سجّل خروج</button>
+      </div>
+    </header>
+
+    <!-- ===== المحتوى ===== -->
+    <section class="pane" id="pane-content" role="tabpanel" aria-labelledby="tab-content">
+      <form id="contentForm" class="pane-grid" novalidate>
+        <div class="col">
+          <div class="card">
+            <h2>صورتك</h2>
+            <div class="photo-edit">
+              <div class="photo-prev" id="photoPreview"><img src="assets/images/profile.jpg" alt=""/></div>
+              <div>
+                <label class="btn btn-ghost btn-sm file-btn">اختار صورة<input type="file" id="photoInput" accept="image/*"/></label>
+                <p class="hint">أحسن مقاس: صورة طولية (4:5) وانت في نص الكادر. الصورة بتتصغّر تلقائي قبل الحفظ.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>أول الصفحة</h2>
+            <label class="field"><span>الاسم</span><input type="text" id="cName"/></label>
+            <label class="field"><span>بتعمل إيه (سطر صغير جنب الاسم)</span><input type="text" id="cRole"/></label>
+            <label class="field"><span>الجملة الكبيرة</span><input type="text" id="cHeadline"/><small class="hint">خليها قصيرة: 2 لـ 4 كلمات.</small></label>
+            <label class="field"><span>الجملة اللي تحتها</span><textarea id="cTagline" rows="2"></textarea></label>
+          </div>
+
+          <div class="card">
+            <h2>الـ Showreel <span class="tag">اختياري</span></h2>
+            <label class="field"><span>لينك فيديو مجمّع لأحسن شغلك</span><input type="url" id="cReel" dir="ltr" placeholder="انستجرام / يوتيوب / تيك توك / درايف"/><small class="hint">بيظهر كشريط كبير فوق الشغل. امسح اللينك لو عايز تخفيه.</small></label>
+            <div class="field">
+              <span>صورة غلاف للـ Showreel <span class="tag">اختياري</span></span>
+              <div class="reel-edit">
+                <div class="reel-prev" id="reelPreview"></div>
+                <div class="reel-edit-actions">
+                  <label class="btn btn-ghost btn-sm file-btn"><span class="file-name" data-empty="اختار صورة">اختار صورة</span><input type="file" id="reelCoverInput" accept="image/*"/></label>
+                  <button type="button" class="link-btn" id="reelCoverRemove" hidden>شيل الغلاف</button>
+                </div>
+              </div>
+              <small class="hint">لقطة من الـ Showreel نفسه. من غيرها الشريط بيظهر أسود بزرار تشغيل ذهبي.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card">
+            <h2>عني</h2>
+            <label class="field"><span>الجملة المميزة (بتظهر كبيرة)</span><textarea id="cQuote" rows="2"></textarea></label>
+            <label class="field"><span>النبذة (كل فقرة في سطر لوحدها)</span><textarea id="cBio" rows="10"></textarea></label>
+            <div class="field-row">
+              <label class="field"><span>الخبرة <span class="tag">اختياري</span></span><input type="text" id="cExp" placeholder="مثلًا: أكتر من 4 سنين"/></label>
+              <label class="field"><span>الحالة</span><input type="text" id="cAvail"/></label>
+            </div>
+            <label class="field"><span>البرامج اللي بتشتغل عليها <span class="tag">اختياري</span></span><input type="text" id="cTools" placeholder="مثلًا: Premiere Pro، After Effects، CapCut"/></label>
+          </div>
+
+          <div class="card">
+            <h2>الخدمات</h2>
+            <label class="field"><span>كل خدمة في سطر: العنوان | الوصف</span><textarea id="cServices" rows="6" dir="auto"></textarea></label>
+          </div>
+        </div>
+
+        <div class="savebar">
+          <p class="msg" id="contentMsg" role="status"></p>
+          <button type="submit" class="btn btn-gold">احفظ التعديلات</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===== الشغل ===== -->
+    <section class="pane" id="pane-works" role="tabpanel" aria-labelledby="tab-works" hidden>
+      <div class="card">
+        <h2>ضيف فيديو</h2>
+        <form id="videoForm" class="add-form" novalidate>
+          <label class="field span-2"><span>لينك الفيديو</span><input type="url" id="vUrl" placeholder="يوتيوب / تيك توك / انستجرام / جوجل درايف" dir="ltr"/></label>
+          <label class="field span-2"><span>العنوان (بيتجاب تلقائي من يوتيوب وتيك توك)</span><input type="text" id="vTitle"/></label>
+          <label class="field"><span>اسم العميل</span><input type="text" id="vClient" placeholder="مثلًا: كابتن يوسف أشرف"/></label>
+          <label class="field"><span>المجال</span><input type="text" id="vCategory" list="catList" placeholder="فيتنس، طبي، عقارات..."/></label>
+          <label class="field"><span>شكل الفيديو</span>
+            <select id="vOrientation"><option value="v">طولي 9:16 (Reels / Shorts)</option><option value="h">عرضي 16:9</option></select>
+          </label>
+          <div class="field"><span>صورة غلاف <span class="tag">اختياري</span></span><label class="btn btn-ghost btn-sm file-btn"><span class="file-name" data-empty="اختار صورة">اختار صورة</span><input type="file" id="vCover" accept="image/*"/></label></div>
+          <div class="span-2 form-end">
+            <p class="msg" id="videoMsg" role="status"></p>
+            <button type="submit" class="btn btn-gold">ضيف الفيديو</button>
+          </div>
+        </form>
+        <datalist id="catList"></datalist>
       </div>
 
-      <!-- ===== محتوى الصفحة ===== -->
-      <div class="admin-card admin-section">
-        <h2>محتوى الصفحة الرئيسية</h2>
-        <form id="contentForm">
-          <div class="field">
-            <label>صورتك</label>
-            <div class="photo-preview" id="photoPreview"><img src="assets/images/profile.jpg"/></div>
-            <input type="file" id="photoInput" accept="image/*"/>
+      <div class="card">
+        <div class="card-head">
+          <h2>الفيديوهات <span class="count" id="videoCount"></span></h2>
+          <p class="hint">الترتيب هنا هو ترتيبها في الموقع. أي تعديل بيتحفظ لوحده.</p>
+        </div>
+        <div class="rows" id="videosList"></div>
+      </div>
+    </section>
+
+    <!-- ===== النتايج ===== -->
+    <section class="pane" id="pane-results" role="tabpanel" aria-labelledby="tab-results" hidden>
+      <div class="card">
+        <h2>الأرقام</h2>
+        <p class="hint">دي الأرقام اللي ظاهرة في قسم النتايج. الرقم في الخانة الصغيرة والوصف جنبه، والصف الفاضي مش بيظهر.</p>
+        <form id="statsForm">
+          <div class="stats-edit" id="statsRows"></div>
+          <div class="form-end">
+            <p class="msg" id="statsMsg" role="status"></p>
+            <button type="submit" class="btn btn-gold">احفظ الأرقام</button>
           </div>
-          <div class="field">
-            <label>الاسم</label>
-            <input type="text" id="cName"/>
-          </div>
-          <div class="field">
-            <label>الدور / التخصص</label>
-            <input type="text" id="cRole"/>
-          </div>
-          <div class="field">
-            <label>الجملة الرئيسية (تحت الصورة)</label>
-            <input type="text" id="cTagline"/>
-          </div>
-          <div class="field">
-            <label>نبذة عني (كل فقرة في سطر لوحدها)</label>
-            <textarea id="cBio"></textarea>
-          </div>
-          <button type="submit" class="btn btn-full">حفظ التعديلات</button>
-          <div class="msg" id="contentMsg"></div>
         </form>
       </div>
 
-      <!-- ===== سكرين شوتات الأثر ===== -->
-      <div class="admin-card admin-section">
-        <h2>سكرين شوتات نتائج الشغل (الأثر)</h2>
-        <form id="impactForm">
-          <div class="field">
-            <label>الصورة (سكرين شوت لعدد مشاهدات أو نتيجة)</label>
-            <input type="file" id="impactImageInput" accept="image/*" required/>
+      <div class="card">
+        <h2>ضيف سكرين شوت لنتيجة</h2>
+        <form id="impactForm" class="add-form" novalidate>
+          <div class="field span-2"><span>الصورة (سكرين شوت لعدد مشاهدات أو تفاعل)</span><label class="btn btn-ghost btn-sm file-btn"><span class="file-name" data-empty="اختار صورة">اختار صورة</span><input type="file" id="iImage" accept="image/*"/></label></div>
+          <label class="field"><span>وصف قصير <span class="tag">اختياري</span></span><input type="text" id="iCaption" placeholder="مثلًا: 3.2 مليون مشاهدة في أسبوع"/></label>
+          <label class="field"><span>لينك الفيديو <span class="tag">اختياري</span></span><input type="url" id="iLink" placeholder="https://..."/></label>
+          <div class="span-2 form-end">
+            <p class="msg" id="impactMsg" role="status"></p>
+            <button type="submit" class="btn btn-gold">ضيف الصورة</button>
           </div>
-          <div class="field">
-            <label>وصف مختصر (اختياري — زي "3.2 مليون مشاهدة")</label>
-            <input type="text" id="impactCaptionInput" placeholder="اختياري"/>
-          </div>
-          <div class="field">
-            <label>لينك الفيديو الأصلي عند العميل (اختياري)</label>
-            <input type="url" id="impactVideoLinkInput" placeholder="https://..."/>
-          </div>
-          <button type="submit" class="btn btn-full">إضافة الصورة</button>
-          <div class="msg" id="impactMsg"></div>
         </form>
       </div>
 
-      <div class="admin-card admin-section">
-        <h2>الصور الحالية</h2>
-        <div id="impactList"></div>
+      <div class="card">
+        <div class="card-head">
+          <h2>الصور الحالية <span class="count" id="impactCount"></span></h2>
+          <p class="hint">أي تعديل بيتحفظ لوحده.</p>
+        </div>
+        <div class="rows" id="impactList"></div>
       </div>
-
-      <!-- ===== الفيديوهات ===== -->
-      <div class="admin-card admin-section">
-        <h2>إضافة فيديو</h2>
-        <form id="videoForm">
-          <div class="field">
-            <label>لينك الفيديو (يوتيوب شورتس / تيك توك / جوجل درايف)</label>
-            <input type="url" id="videoUrlInput" placeholder="https://youtube.com/shorts/... أو https://tiktok.com/@user/video/... أو https://drive.google.com/file/d/.../view" required/>
-          </div>
-          <div class="field">
-            <label>العنوان (بيتجاب تلقائي من يوتيوب وتيك توك، وتقدر تعدّله)</label>
-            <input type="text" id="videoTitleInput" placeholder="عنوان الفيديو"/>
-          </div>
-          <button type="submit" class="btn btn-full">إضافة الفيديو</button>
-          <div class="msg" id="videoMsg"></div>
-        </form>
-      </div>
-
-      <div class="admin-card admin-section">
-        <h2>الفيديوهات الحالية</h2>
-        <div id="videosList"></div>
-      </div>
-    </div>
+    </section>
   </div>
+
+  <p class="toast" id="toast" role="status" aria-live="polite"></p>
 
   <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
 
-  <script src="js/firebase-config.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/admin.js"></script>
+  <script src="js/firebase-config.js?v=4"></script>
+  <script src="js/utils.js?v=4"></script>
+  <script src="js/admin.js?v=4"></script>
 </body>
 </html>
