@@ -1,5 +1,5 @@
 /* ==========================================================
-   حط هنا بيانات مشروع Firebase بتاعك
+   بيانات مشروع Firebase بتاعك
    (Project settings ⚙️ → Your apps → Web app → SDK config)
    ========================================================== */
 const firebaseConfig = {
@@ -14,4 +14,5 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
-const auth = firebase.auth();
+// الصفحة الرئيسية مش بتحمّل Auth (أخف وأسرع)، لوحة التحكم بس اللي محتاجاه
+const auth = typeof firebase.auth === "function" ? firebase.auth() : null;
